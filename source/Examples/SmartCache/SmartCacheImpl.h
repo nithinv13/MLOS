@@ -15,6 +15,10 @@
 
 #pragma once
 
+class LFU {
+    
+}
+
 template<typename TKey, typename TValue>
 class SmartCacheImpl
 {
