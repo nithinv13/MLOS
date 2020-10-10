@@ -164,7 +164,8 @@ main(
 
         for (int i = 0; i < 20; i++)
         {
-            CyclicalWorkload(2048, smartCache);
+            // CyclicalWorkload(2048, smartCache);
+            RandomWorkload(2048, smartCache);
         }
 
         // After having run a workload for a while, we want to check for a new

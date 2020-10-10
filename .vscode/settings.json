@@ -15,5 +15,9 @@
     ],
     // Control how the vim reflow key combo wraps text for comments.
     // Set it to something less than the code length but not too short.
-    "vim.textwidth": 100
+    "vim.textwidth": 100,
+    "files.associations": {
+        "unordered_map": "cpp",
+        "list": "cpp"
+    }
 }

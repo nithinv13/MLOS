@@ -85,7 +85,7 @@ namespace SmartCache
             // See out/Mlos.CodeGen.out/SmartCache/*.cs for the C# code
             // generation output from those partial definitions.
             //
-            SmartCacheProxy.CacheRequestEventMessage.Callback = CacheRequestEventMessageHandler;
+            SmartCacheProxy..Callback = CacheRequestEventMessageHandler;
             SmartCacheProxy.RequestNewConfigurationMessage.Callback = RequestNewConfigurationMessageHandler;
 
             // Create smart cache parameter search space.
@@ -236,7 +236,7 @@ namespace SmartCache
                     CacheEvictionPolicy.LeastRecentlyUsed => (int)newConfigDictionary["lru_cache_config.cache_size"].GetDouble(),
                     CacheEvictionPolicy.MostRecentlyUsed => (int)newConfigDictionary["mru_cache_config.cache_size"].GetDouble(),
                     CacheEvictionPolicy.LeastFrequentlyUsed => (int)newConfigDictionary["lfu_cache_config.cache_size"].GetDouble(),
-                    _ => throw new NotSupportedException(),
+                        _ => throw new NotSupportedException(),
                 };
             }
             else
