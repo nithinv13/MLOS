@@ -20,7 +20,7 @@
 
 uint64_t CyclicalWorkload(uint64_t sequenceNumber, SmartCacheImpl<int32_t, int32_t>& smartCache)
 {
-    for (int32_t i = 1; i <= sequenceNumber; i++)
+    for (int32_t i = 1; i < sequenceNumber; i++)
     {
         int32_t* element = smartCache.Get(i);
         if (element == nullptr)
@@ -32,40 +32,41 @@ uint64_t CyclicalWorkload(uint64_t sequenceNumber, SmartCacheImpl<int32_t, int32
     return 1;
 }
 
-uint64_t RandomWorkload(uint64_t sequenceNumber, SmartCacheImpl<int32_t, int32_t>& smartCache)
+uint64_t LFUWorkload(uint64_t sequenceNumber, SmartCacheImpl<int32_t, int32_t>& smartCache)
 {
-    for (int32_t j = 1; j < 4; j++) {
-    for (int32_t i = 1; i < sequenceNumber/3; i++)
+    for (int32_t k = 0; k < 4; k++) {
+	for (int32_t j = 0; j < 4; j++)
+	{
+	    for (int32_t i = 1; i < sequenceNumber/4; i++)
+	    {
+	        int32_t* element = smartCache.Get(i);
+	        if (element == nullptr)
+	        {
+	            smartCache.Push(i, i);
+	        }
+	    }
+	}
+    for (int32_t i = sequenceNumber/4; i < 3*sequenceNumber/4; i++)
     {
-        //int32_t key = rand() % (sequenceNumber/4);
-        int32_t key = i;
-        int32_t* element = smartCache.Get(key);
+        int32_t* element = smartCache.Get(i);
         if (element == nullptr)
         {
-            smartCache.Push(key, key);
+            smartCache.Push(i, i);
+        }
+        element = smartCache.Get(i - sequenceNumber/4 + 1);
+        if (element == nullptr)
+        {
+            smartCache.Push(i - sequenceNumber/4 + 1, i - sequenceNumber/4 + 1);
+        }
+    }
+    for (int32_t i = 1; i < sequenceNumber/4; i++)
+    {
+        int32_t* element = smartCache.Get(i);
+        if (element == nullptr)
+        {
+            smartCache.Push(i, i);
         }
     }
     }
-    for (int32_t i = sequenceNumber/3; i < sequenceNumber; i++)
-    {
-        //int32_t key = sequenceNumber/4 + (rand() % (3*sequenceNumber/4));
-        int32_t key = i;
-        int32_t* element = smartCache.Get(key);
-        if (element == nullptr)
-        {
-            smartCache.Push(key, key);
-        }
-    }
-    // for (int32_t i = 2*sequenceNumber/3; i < sequenceNumber; i++)
-    // {
-    //     //int32_t key = rand() % (sequenceNumber/4);
-    //     int32_t key = i - (2*sequenceNumber/3);
-    //     int32_t* element = smartCache.Get(key);
-    //     if (element == nullptr)
-    //     {
-    //         smartCache.Push(key, key);
-    //     }
-    // }
-
     return 1;
 }

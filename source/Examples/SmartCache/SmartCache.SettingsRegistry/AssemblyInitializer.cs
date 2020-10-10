@@ -85,7 +85,7 @@ namespace SmartCache
             // See out/Mlos.CodeGen.out/SmartCache/*.cs for the C# code
             // generation output from those partial definitions.
             //
-            SmartCacheProxy..Callback = CacheRequestEventMessageHandler;
+            SmartCacheProxy.CacheRequestEventMessage.Callback = CacheRequestEventMessageHandler;
             SmartCacheProxy.RequestNewConfigurationMessage.Callback = RequestNewConfigurationMessageHandler;
 
             // Create smart cache parameter search space.
